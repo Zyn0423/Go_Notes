@@ -51,16 +51,27 @@ Goroutine ：GO程
 
            特性：主Go程结束，子Go程随之退出
 
-runtime.Gosched()：出让当前GO程所占用CPU轮片时间片，当再次获得CPU时，从出让位置继续恢复执行。
-               ----时间片轮转调度算法。
-runtime.Goexit():立即终止当前的Goroutine执行，调度器确保所有以注册的defer延迟调用被执行，之后就没有作用
-        return:返回当前函数到调用者，return之前的defer都生效
+runtime 包的使用：
+    runtime.Gosched()：出让当前GO程所占用CPU轮片时间片，当再次获得CPU时，从出让位置继续恢复执行。
+                   ----时间片轮转调度算法。
+    runtime.Goexit():立即终止当前的Goroutine执行，调度器确保所有以注册的defer延迟调用被执行，之后就没有作用
+            return:返回当前函数到调用者，return之前的defer都生效
 
-runtime.GOMAXPROCS():用来设置可以并行计算机CPU核数的最大值，并返回之前的值。首次调用的返回值
+    runtime.GOMAXPROCS():用来设置可以并行计算机CPU核数的最大值，并返回之前的值。首次调用的返回值
 
 
 ======================================================================================================
 channel:是一种数据类型。对应一个'管道'（IFIO）
 channel定义：make(chan,在chan中要传递的数据类型，容量)   容量=0 无缓冲channel  ，有缓冲容量>0
 e.g: make(chan,int) or make(chan,string,0) .
+channel:两个端
+        一端：写端(传入端) chan<-
+      另一端：读端（传出端）<-chan
+      要求：读端和写端必须同时满足条件，才能在chan上进行数据流动，否则会阻塞（类似于python Queue）
+
+
+
+【知识点】
+        每当有一个进程时就会打开三个文件，标准输入、标准输出、标准错误 ---> 对应三个文件 stdin、stdout、stderr
+        当进程结束时，操作系统自动关闭三个文件。
 
