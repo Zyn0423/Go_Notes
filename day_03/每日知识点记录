@@ -57,3 +57,10 @@ runtime.Goexit():立即终止当前的Goroutine执行，调度器确保所有以
         return:返回当前函数到调用者，return之前的defer都生效
 
 runtime.GOMAXPROCS():用来设置可以并行计算机CPU核数的最大值，并返回之前的值。首次调用的返回值
+
+
+======================================================================================================
+channel:是一种数据类型。对应一个'管道'（IFIO）
+channel定义：make(chan,在chan中要传递的数据类型，容量)   容量=0 无缓冲channel  ，有缓冲容量>0
+e.g: make(chan,int) or make(chan,string,0)
+
