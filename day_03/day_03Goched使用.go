@@ -13,8 +13,10 @@ func main() {
 			//time.Sleep(time.Second)
 		}
 	}()
+
 	for {
 		runtime.Gosched() //TODO 出让当前CPU时间
 		fmt.Println("-----Pro--------")
+
 	}
 }
