@@ -56,3 +56,4 @@ runtime.Gosched()：出让当前GO程所占用CPU轮片时间片，当再次获�
 runtime.Goexit():立即终止当前的Goroutine执行，调度器确保所有以注册的defer延迟调用被执行，之后就没有作用
         return:返回当前函数到调用者，return之前的defer都生效
 
+runtime.GOMAXPROCS():用来设置可以并行计算机CPU核数的最大值，并返回之前的值。首次调用的返回值
