@@ -51,5 +51,8 @@ Goroutine ：GO程
 
            特性：主Go程结束，子Go程随之退出
 
-runtime.Gosched()
-                ：出让当前GO程所占用CPU轮片时间片，当再次获得CPU时，从出让位置继续恢复执行。
+runtime.Gosched()：出让当前GO程所占用CPU轮片时间片，当再次获得CPU时，从出让位置继续恢复执行。
+               ----时间片轮转调度算法。
+runtime.Goexit():立即终止当前的Goroutine执行，调度器确保所有以注册的defer延迟调用被执行，之后就没有作用
+        return:返回当前函数到调用者，return之前的defer都生效
+
