@@ -23,7 +23,8 @@ func dance() {
 func main() {
 	go sing()
 	go dance() //TODO 子任务
-	for {      //TODO 父进程
+	//TODO 父进程
+	for {
 
 	}
 }
