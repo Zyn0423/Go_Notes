@@ -1,0 +1,8 @@
+定义channel:make(chan 类型，容量)
+          ch:=make(chan string,0)
+       写端:ch <- "hello"  写端写数据，读端不在读。阻塞
+       读端：str:= <- ch   读端读数据，写端不在写。阻塞
+
+
+channel 同步数据传递：
+        len(chan):剩余未读取的数据个数。cap(chan) 通道的容量
