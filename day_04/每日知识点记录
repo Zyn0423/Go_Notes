@@ -18,5 +18,21 @@ channel 同步数据传递：
             缓冲区可以进行数据存蓄，储备能力上限，阻塞。具备异步的能力，不需要同时操作channel缓冲区
 
 
+关闭channel:
+            确定不在相对端发送，接收数据。关闭channel,使用close(ch)关闭channel
+            对端可以判断channel是否关闭：
+                if num,ok:=<-ch;ok == true{
+                    如果对端已经关闭，ok-->flase.num 无数据
+                    如果对端没有关闭，ok-->true.num保存读取到的数据
+                    fmt.println("读")
+                }else{
+                    fmt.Println("")
+                }
+            总结：
+                1.数据不发送完，不应该关闭。
+                2.已经关闭的channel 不能再向其写数据。保存 panic send on closed channel
+                3.写端已经关闭channel,可以从中读取数据，读到0.说明写端已关闭。
+
+
 阻塞：由于某种原因数据没有到达，当前协程（线程）处于等待状态，直到条件满足，解除阻塞状态。
 同步：两个或多个协程（线程）间，保持数据内容一致性的机制。
