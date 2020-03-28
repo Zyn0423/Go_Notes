@@ -28,6 +28,10 @@ channel 同步数据传递：
                 }else{
                     fmt.Println("")
                 }
+            可以使用range替换ok:
+                              for num:=range ch{       ch 不能替换为<-ch
+
+                              }
             总结：
                 1.数据不发送完，不应该关闭。
                 2.已经关闭的channel 不能再向其写数据。保存 panic send on closed channel
