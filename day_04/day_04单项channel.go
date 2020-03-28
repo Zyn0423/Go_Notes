@@ -20,6 +20,7 @@ func main_01() {
 
 func write_ch(ch chan<- int) {
 	ch <- 77
+	close(ch)
 }
 
 func read_ch(ch <-chan int) {
@@ -28,6 +29,7 @@ func read_ch(ch <-chan int) {
 }
 
 func main() {
+	//TODO 共用一个chan
 	ch := make(chan int) //定义一个双向chan
 	go func() {
 		write_ch(ch) // TODO 传引用
