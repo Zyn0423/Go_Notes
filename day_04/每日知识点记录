@@ -39,6 +39,21 @@ channel 同步数据传递：
                                     读有缓冲channel：如果缓冲区有数据，先读数据，读完数据后，可以继续读，读到0
 
 
+单项channel:
+            默认的chanel是双向的。var ch chan int           ch :=make(chan int)
+            单项写chan  var write_ch chan <- int          write_ch :=make(chan<- int)
+            单项读chan  var read_ch <-chan int            read_ch :=make(<-chan int)
+
+            转换：
+                1. 双向channel可以隐式转换为任意一种单项chan
+                        write_ch =ch
+                2.单项chan 不能转换为双向chan
+                        ch =write_ch/read_ch    error !!!
+
+
+            传参：传【引用】
+
+
 
 阻塞：由于某种原因数据没有到达，当前协程（线程）处于等待状态，直到条件满足，解除阻塞状态。
 同步：两个或多个协程（线程）间，保持数据内容一致性的机制。
