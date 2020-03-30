@@ -1,0 +1,11 @@
+select 超时处理：
+            select 监听time.After 中的channel的读事件，如果定时间到，系统会向该channel写入系统当前时间
+            select{
+            case <-time.After(time.Secound *5):
+
+            }
+
+死锁：
+    1.单go程自己死锁： channel 应该至少两个go程中进行通信，否则会死锁。
+    2.Go程中channel 访问顺序导致死锁 ：使用channel 一端读 ，要保证另一端写操作，同时又机会执行，否则会死锁。
+    3.多Go程,多channel交叉死锁
