@@ -14,6 +14,15 @@ func HandlerConnect(conn net.Conn) {
 	buf := make([]byte, 1024*4) //TODO 循环客服端数据
 	for {
 		n, err := conn.Read(buf)
+		if n == 0 { //TODO 会出现强制关闭
+			fmt.Println("服务端检测到客服端已关闭，断开连接 ！！！")
+			return
+		}
+
+		if "exit\n" == string(buf[:n]) {
+			fmt.Println("服务端检测到客户端以退出的请求，服务端关闭！！！")
+			return
+		}
 		if err != nil {
 			fmt.Println("conn.Read", err)
 			//goto Block

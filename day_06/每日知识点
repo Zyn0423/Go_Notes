@@ -49,3 +49,15 @@ TCP-CS客服端：
             3.接收服务端回发：conn.Read()
             4.关闭连接：conn.Close()
 
+TCP-CS服务器并发版：
+            1.创建socket listen,err :=net.Listen("tcp","ip+port")
+            2.defer listen.Close()
+            3.主程循环阻塞事件监听 :listen.Accept()
+            4.创建go程对每一个客服端进行数据上的通信 go handlerconnet()
+            5.go handlerconnet()
+                1.defer conn.Close()
+                2.查看那个客服端：addr:=conn.remoteAddr()
+                3.for 循环接收数据：conn.Read(buf)    buf :=make([]byte,1024*4)
+                4.处理数据：strings.ToUpper()
+                5.回写数据：conn.write(buf[:n])
+
