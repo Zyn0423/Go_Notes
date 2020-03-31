@@ -14,7 +14,7 @@ func HandlerConnect(conn net.Conn) {
 	buf := make([]byte, 1024*4) //TODO 循环客服端数据
 	for {
 		n, err := conn.Read(buf)
-		if n == 0 { //TODO 会出现强制关闭
+		if n == 0 { //TODO 强制关闭会导致进入此判断
 			fmt.Println("服务端检测到客服端已关闭，断开连接 ！！！")
 			return
 		}
