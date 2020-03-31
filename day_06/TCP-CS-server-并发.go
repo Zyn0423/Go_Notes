@@ -14,12 +14,13 @@ func HandlerConnect(conn net.Conn) {
 	buf := make([]byte, 1024*4) //TODO 循环客服端数据
 	for {
 		n, err := conn.Read(buf)
+		//fmt.Println("byte",buf[:n])  //TODO ASCLL 字符排查
 		if n == 0 { //TODO 强制关闭会导致进入此判断
 			fmt.Println("服务端检测到客服端已关闭，断开连接 ！！！")
 			return
 		}
 
-		if "exit\n" == string(buf[:n]) {
+		if "exit\n" == string(buf[:n]) || "exit\r\n" == string(buf[:n]) {
 			fmt.Println("服务端检测到客户端以退出的请求，服务端关闭！！！")
 			return
 		}
