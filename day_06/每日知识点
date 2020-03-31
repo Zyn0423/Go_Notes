@@ -36,10 +36,16 @@ socket：套接字
             B/S : 优点：开发工作量小，不受平台限制，安全性威胁小。缺点：缓冲数据差，选择协议不灵活
 
 TCP-CS服务器：
-            1.创建socket listen ,err :=net.Listen("tcp","ip+prot")  -->服务器自己的ip
+            1.创建socket listen ,err :=net.Listen("tcp","ip+port")  -->服务器自己的ip
             2.对事件监听： conn,err:=listen.Accept()   conn用于通信的
             3.接收：conn.Read()
             4.处理数据使用数据[]byte
             5.发送：conn.write()
             6.关闭连接：listen、conn
+
+TCP-CS客服端：
+            1.创建socket conn,err :=net.Dial("tcp","ip+port)
+            2.写数据给服务端: conn.write()
+            3.接收服务端回发：conn.Read()
+            4.关闭连接：conn.Close()
 
