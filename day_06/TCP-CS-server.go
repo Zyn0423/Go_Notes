@@ -12,12 +12,13 @@ func main() {
 		return
 	}
 	defer listener.Close()
-	fmt.Println("阻塞等待连接")
+	fmt.Println("阻塞监听等待客服端连接")
 	Conn, err := listener.Accept() //Conn, error
 	if err != nil {
 		fmt.Println("服务端和客服端连接失败。。。")
 		return
 	}
+	fmt.Println("服务端和客户端成功建立")
 	defer Conn.Close()
 	buf := make([]byte, 1024*4)
 	n, err := Conn.Read(buf)
@@ -25,5 +26,7 @@ func main() {
 		fmt.Println("Conn.Read 接收失败.....")
 		return
 	}
+
 	fmt.Println("服务器读到的数据", string(buf[:n]))
+	Conn.Write([]byte("Yes....."))
 }
