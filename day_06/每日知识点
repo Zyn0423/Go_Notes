@@ -61,3 +61,7 @@ TCP-CS服务器并发版：
                 4.处理数据：strings.ToUpper()
                 5.回写数据：conn.write(buf[:n])
 
+
+服务端判断关闭：
+            1.Read读客服端 --0 对端关闭
+            2.nc 命令发送数据时默认结尾自带"\n"
