@@ -67,5 +67,5 @@ TCP-CS服务器并发版：
             2.nc 命令发送数据时默认结尾自带"\n"
 
 
-TCP:三次握手 ：C 发送SYN -> S 发送ACK -> C 发送 SYN 和ACK 给C
-    四次挥手 ：C 发送FIN -> S 发送ACK ->半关闭状态等待S把数据发送完毕后 S发送FIN->C 发送 ACK 到 S
+TCP通信过程:三次握手 ：C 主动发送SYN -> S 被动应答ACK同时发送SYN  -> C 主动发起请求端，发送应答ACK   （标准TCP三次握手建立完成.-----server:Accept()  ----client:Dial()返回）
+           四次挥手 ：C 主动发送FIN -> S 被动关闭请求端发送应答ACK ->被动关闭请求端S发送FIN->C 主动应答发送 ACK 到 S（标志：半关闭完成 ----close()）
