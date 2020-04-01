@@ -69,3 +69,21 @@ TCP-CS服务器并发版：
 
 TCP通信过程:三次握手 ：C 主动发送SYN -> S 被动应答ACK同时发送SYN  -> C 主动发起请求端，发送应答ACK   （标准TCP三次握手建立完成.-----server:Accept()  ----client:Dial()返回）
            四次挥手 ：C 主动发送FIN -> S 被动关闭请求端发送应答ACK ->被动关闭请求端S发送FIN->C 主动应答发送 ACK 到 S（标志：半关闭完成 ----close()）
+
+
+
+CP状态转换图：
+
+            主动发起连接请求端： CLOSED —— 完成三次握手 —— ESTABLISEHED（数据通信状态）—— Dial()函数返回
+
+            被动发起连接请求端： CLOSED —— 调用Accept()函数 —— LISTEN —— 完成三次握手 —— ESTABLISEHED （数据通信状态）—— Accept()函数返回
+
+                数据传递期间 —— ESTABLISEHED （数据通信状态）
+
+            主动关闭连接请求端：
+
+                ESTABLISEHED —— FIN_WAIT_2 (半关闭）——  TIME_WAIT —— 2MSL —— 确认最后一个ACK被对端成功接收。—— CLOSE
+
+                半关闭、TIME_WAIT、2MSL ——只会出现在 “主动关闭连接请求端”
+
+            被动关闭连接请求端：ESTABLISEHED —— CLOSE
