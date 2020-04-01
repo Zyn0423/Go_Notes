@@ -28,8 +28,10 @@ func main() {
 	}
 
 	fmt.Printf("服务端收到客户端 %v\n 数据：%s\n", udpaddr, string(buf[:n]))
+	// 提取系统当前时间转换为str类型
 	time_now := time.Now().String()
-	n, err = UDPConn.WriteToUDP([]byte(time_now), udpaddr) // TODO WriteToUDP acts like WriteTo but takes a UDPAddr.  int, error
+	// 回写客服端
+	_, err = UDPConn.WriteToUDP([]byte(time_now), udpaddr) // TODO WriteToUDP acts like WriteTo but takes a UDPAddr.  int, error
 	if err != nil {
 		fmt.Println("UDPConn.WriteToUDP", err)
 		return

@@ -1,0 +1,15 @@
+TCP 通信：
+        面向连接，可靠的数据包传输。
+UDP 通信：
+        面向无连接，不可靠的报文传递。
+
+UDP：服务器：
+           1.创建server端地址结构（IP+Adder） net.ResolveUDPAddr()
+           2.创建用于通信的socket,绑定地址结构 upconnn :=net.ListUDP("udp","server adder结构")
+           3.defer upconn.close()
+           4.读取客服端发送的数据： upconn.ReadFromUDP()返回 n cltadder(客户端+IP) err 三个参数
+           5.写数据给客服端：upconn.WriteToUDP([]byte,cltadder)
+
+UDP :客户端：
+          参考TCP客户端：net.Dial("udp","ip+port")
+
