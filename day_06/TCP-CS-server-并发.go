@@ -20,7 +20,7 @@ func HandlerConnect(conn net.Conn) {
 			return
 		}
 
-		if "exit\n" == string(buf[:n]) || "exit\r\n" == string(buf[:n]) {
+		if "exit\n" == string(buf[:n]) || "exit\r\n" == string(buf[:n]) { // TODO winds
 			fmt.Println("服务端检测到客户端以退出的请求，服务端关闭！！！")
 			return
 		}
