@@ -77,6 +77,8 @@ func wcFunc(str_text string) map[string]int {
 	//如："I love my work and I love my family too"
 	//map[I:2 and:1 family:1 love:2 my:2 too:1 work:1]
 	list_ := strings.Fields(str_text)
+	fmt.Println(list_)
+
 	m := map[string]int{}
 	for i := 0; i < len(list_); i++ {
 		if _, bool_vlaue := m[list_[i]]; bool_vlaue {
