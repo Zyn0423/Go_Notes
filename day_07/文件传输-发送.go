@@ -9,11 +9,12 @@ import (
 
 func file_fun(conn net.Conn, file_name string) {
 	f, err := os.Open(file_name)
-	defer f.Close()
 	if err != nil {
 		fmt.Println("os.Open", err)
 		return
 	}
+	defer f.Close()
+
 	buf := make([]byte, 1024*4)
 	for {
 		n, err := f.Read(buf)
@@ -40,20 +41,27 @@ func main() {
 	file_name := os.Args
 	if len(file_name) != 2 {
 		fmt.Println("请输入要路径")
+		return
 	}
 
-	Conn, err := net.Dial("tcp", "127.0.0.1:8001")
-	defer Conn.Close()
-	if err != nil {
-		fmt.Println("net.Dial", err)
-	}
 	FileInfo, err := os.Stat(file_name[1])
 	if err != nil {
 		fmt.Println("os.Stat", err)
+		return
 	}
+
+	Conn, err := net.Dial("tcp", "127.0.0.1:8001")
+	if err != nil {
+		fmt.Println("net.Dial", err)
+		return
+	}
+	defer Conn.Close()
+
 	_, err = Conn.Write([]byte(FileInfo.Name()))
+
 	if err != nil {
 		fmt.Println("Conn.Write", err)
+		return
 	}
 	fmt.Println("客服端发送成功")
 	buf := make([]byte, 4096)
