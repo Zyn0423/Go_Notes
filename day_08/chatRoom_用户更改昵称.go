@@ -33,18 +33,21 @@ func handlerConnet3(conn net.Conn) {
 	messagesclientmap3[Addr] = clt
 
 	messages3 <- MakeMsg3(clt, "login")
+	isQuit := make(chan bool)
 	go func() {
 		buf := make([]byte, 1024*4)
 		for {
 			n, err := conn.Read(buf)
+			if n == 0 {
+				fmt.Printf("检测到用户端%s退出\n", clt.Name)
+				isQuit <- true
+				return
+			}
 			if err != nil {
 				fmt.Println("conn.Write", err)
 				return
 			}
-			if n == 0 {
-				fmt.Printf("检测到用户端%s退出\n", clt.Name)
-				return
-			}
+
 			//将读到用户消息保存到msg中
 			msg := string(buf[:n-1])
 			if msg == "who" && len(msg) == 3 {
@@ -66,7 +69,12 @@ func handlerConnet3(conn net.Conn) {
 
 	}()
 	for {
-
+		select {
+		case <-isQuit:
+			delete(messagesclientmap3, clt.Adder) //将用户从messagesclientmap3 中移除
+			messages3 <- MakeMsg3(clt, "exit")    //写入用户退出消息的全局channel
+			return
+		}
 	}
 
 }
