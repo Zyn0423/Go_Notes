@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"strings"
+	"time"
 )
 
 type Client3 struct {
@@ -27,6 +28,7 @@ func MakeMsg3(clt Client3, data string) (buf string) {
 }
 func handlerConnet3(conn net.Conn) {
 	defer conn.Close()
+	hasdata := make(chan bool) // 监听用户是否在线
 	Addr := conn.RemoteAddr().String()
 	clt := Client3{make(chan string), Addr, Addr}
 	go WriteMsgToClient3(conn, clt)
@@ -64,6 +66,7 @@ func handlerConnet3(conn net.Conn) {
 			} else {
 				messages3 <- MakeMsg3(clt, msg)
 			}
+			hasdata <- true
 
 		}
 
@@ -71,6 +74,12 @@ func handlerConnet3(conn net.Conn) {
 	for {
 		select {
 		case <-isQuit:
+			delete(messagesclientmap3, clt.Adder) //将用户从messagesclientmap3 中移除
+			messages3 <- MakeMsg3(clt, "exit")    //写入用户退出消息的全局channel
+			return
+		case <-hasdata: //什么都不做目的就是重置下面的定时器
+
+		case <-time.After(time.Second * 10):
 			delete(messagesclientmap3, clt.Adder) //将用户从messagesclientmap3 中移除
 			messages3 <- MakeMsg3(clt, "exit")    //写入用户退出消息的全局channel
 			return
