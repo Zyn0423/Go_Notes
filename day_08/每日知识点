@@ -21,7 +21,7 @@
 
 		在现用户列表： onlineMap[string]Client 	key: 客户端IP+port	value: Client
 
-		消息通道： message
+		消息通道： message 
 
 广播用户上线：
 

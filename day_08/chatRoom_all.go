@@ -74,6 +74,7 @@ func handlerConnet3(conn net.Conn) {
 	for {
 		select {
 		case <-isQuit:
+			close(clt.C)
 			delete(messagesclientmap3, clt.Adder) //将用户从messagesclientmap3 中移除
 			messages3 <- MakeMsg3(clt, "exit")    //写入用户退出消息的全局channel
 			return
