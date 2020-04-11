@@ -1,14 +1,120 @@
+
+聊天室模块划分：
+	
+	主go程：
+		创建监听socket。 for 循环 Accept() 客户端连接 —— conn。 启动 go 程 HandlerConnect:
+
+	HandlerConnect:
+
+		创建用户结构体对象。 存入 onlineMap。发送用户登录广播、聊天消息。处理查询在线用户、改名、下线、超时提出。
+
+	Manager:
+		监听 全局 channel message， 将读到的消息 广播给 onlineMap 中的所有用户。
+
+	WriteMsgToClient:
+
+		读取 每个用户自带 channel C 上消息（由Manager发送该消息）。回写给用户。
+
+	全局数据模块：
+
+		用户结构体： Client { C、Name、Addr string }
+
+		在现用户列表： onlineMap[string]Client 	key: 客户端IP+port	value: Client
+
+		消息通道： message
+
 广播用户上线：
-        1.主go程中，创建监听套接字， defer  .close()
-        2.for 循环监听客服端连接请求accept()
-        3.有一个客户端连接，创建新Go程处理客户端数据handlerConnet(conn)  defer
-        4.定义全局结构体类型  C Name adder
-        5.创建全局map channel
-        6.实现HandlerConnet,获取客服端IP+ PORT  ---Remoteadder() 初始化新用户结构信息  name ==adder
-        7.创建Manager 实现管理GO程  在accept()之前
-        8.实现Manager 初始化在线用户map，循环读取channel 如果没有数据阻塞，如果有数据遍历在线用户map，讲数据写到用户C里
-        9.讲新的用户添加到在线用户map中。key(adder+port):value(新用户结构体)
-        10.创建WriteMsgToClient Go 程，专门给当前用户写数据  ，来源用用户自带的C中
-        11.实现WriteMsgToClient(clnt,conn)。遍历自带的C，读数据，conn.Write()到客服端
-        12.HandlerConnet中，结束位置，组织用户上线信息，将用户上线信息写到全局channel --Manager 的读就被激活，否则阻塞
-        13.HandlerConnet中加 结尾加 for{;}
+
+	1. 主go程中，创建监听套接字。 记得defer
+
+	2. for 循环监听客户端连接请求。Accept()
+
+	3. 有一个客户端连接，创建新 go 程 处理客户端数据 HandlerConnet(conn)	defer
+
+	4. 定义全局结构体类型  C 、Name、Addr
+
+	5. 创建全局map、channel
+
+	6. 实现HandlerConnet， 获取客户端IP+port —— RemoteAddr()。 初始化新用户结构体信息。   name == Addr
+
+	7. 创建 Manager 实现管理go程。 —— Accept() 之前。
+
+	8. 实现 Manager 。 初始化 在线用户 map。 循环 读取全局 channel，如果无数据，阻塞。 如果有数据， 遍历在线用户 map ，将数据写到 用户的 C 里
+
+	9. 将新用户添加到 在线用户 map 中 。 Key == IP+port  value= 新用户结构体
+
+	10. 创建 WriteMsgToClient go程，专门给当前用户写数据。 —— 来源于 用户自带的 C 中 
+
+	11. 实现 WriteMsgToClient（clnt，conn） 。遍历自带的 C ，读数据，conn.Write 到 客户端。
+
+	12. HandlerConnet中，结束位置，组织用户上线信息， 将 用户上线信息 写 到全局 channel  —— Manager 的读就被激活（原来一直阻塞）
+
+	13. HandlerConnet中，结尾 加 for {  ；}
+
+广播用户消息：
+
+	1.  封装 函数 MakeMsg() 来处理广播、用户消息 
+
+	2. HandlerConnet中, 创建匿名go程， 读取用户socket上发送来的 聊天内容。写到 全局 channel
+
+	3. for 循环 conn.Read	n == 0    err != nil 
+
+	4. 写给全局 message  ——  后续的事，原来广播用户上线模块 完成。（Manager、WriteMsgToClient）
+
+查询在线用户：
+
+	1. 将读取到的用户消息 msg 结尾的 “\n”去掉。
+
+	2. 判断是否是“who”命令
+
+	3. 如果是，遍历在线用户列表，组织显示信息。写到 socket 中。
+
+	4. 如果不是。 写给全局 message  
+
+修改用户名：
+
+	1. 将读取到的用户消息 msg 判断是否包含 “rename|”
+
+	2. 提取“|”后面的字符串。存入到Client的Name成员中
+
+	3. 更新在线用户列表。onlineMap。 key —— IP + prot
+	
+	4. 提示用户更新完成。conn.Write
+
+用户退出：
+	1.  在 用户成功登陆之后， 创建监听 用户退出的 channel —— isQuit
+
+	2. 当 conn.Read == 0 ,  isQuit <- true
+
+	3. 在 HandlerConnet 结尾 for 中， 添加 select  监听  <-isQuit
+
+	4. 条件满足。 将用户从在线列表移除。 组织用户下线消息，写入 message （广播）
+
+超时强踢：
+
+	1.  在 select 中 监听定时器。（time.After()）计时到达。将用户从在线列表移除。 组织用户下线消息，写入 message （广播）
+
+	2.  创建监听 用户活跃的 channel —— hasData
+
+	3.  只用户执行：聊天、改名、who 任意一个操作，hasData<- true
+
+	4. 在 select 中 添加监听 <-hasData。 条件满足，不做任何事情。 目的是重置计时器。
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
