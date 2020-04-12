@@ -15,8 +15,10 @@ func errfunc(err error, info string) {
 func main() {
 	Listener, err := net.Listen("tcp", "127.0.0.1:8000")
 	errfunc(err, "net.Listen")
+	defer Listener.Close()
 	Conn, err := Listener.Accept()
 	errfunc(err, "Listener.Accept")
+	defer Conn.Close()
 	buf := make([]byte, 1024*4)
 	n, err := Conn.Read(buf)
 	errfunc(err, "Conn.Read")
