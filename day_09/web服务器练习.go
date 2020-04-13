@@ -6,10 +6,8 @@ import (
 	"os"
 )
 
-//Coinw做市商资金统计.xlsx
-//infinite_2020_2_20.docx
 func opensendfile(filename string, w http.ResponseWriter) {
-	FileNamePath := "/Users/zxn/Documents" + filename
+	FileNamePath := "/Users/xxx/xxxx" + filename
 	f, err := os.Open(FileNamePath)
 
 	if err != nil {
@@ -30,8 +28,6 @@ func opensendfile(filename string, w http.ResponseWriter) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	//w.Write([]byte("hello world"))
-	//fmt.Println(r.URL)
 	fmt.Println("客服端请求", r.URL)
 	opensendfile(r.URL.String(), w)
 }
