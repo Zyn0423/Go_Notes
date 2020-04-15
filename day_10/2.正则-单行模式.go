@@ -42,6 +42,10 @@ func main() {
 
 	result1, _ := regexp.Compile(`<div>(?s:(.*?))</div>`)
 	data := result1.FindAllStringSubmatch(str, -1)
-	fmt.Println(data)
+	// 提取需要的信息
+	for _, n := range data {
+		//fmt.Println("one[0]=",n[0])
+		fmt.Println("one[1]=", n[1])
+	}
 
 }
