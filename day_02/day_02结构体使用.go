@@ -17,7 +17,7 @@ type user string //自定义数据类型
 
 //TODO 普通变量定义和初始化
 //1. 顺序初始化
-var man Person = Person{"张三", 20, 'm'} //全员必须初始化
+var man = Person{"张三", 20, 'm'} //全员必须初始化
 
 //2.指定成员初始化：
 
@@ -38,9 +38,9 @@ func main_01() {
 	man3.sex = 'f'
 	fmt.Printf("%q\n", man3)
 	// TODO 机构体比较  只能用 == ！=     不能用<>
-	var p1 Person = Person{"张三", 20, 'm'}
-	var p2 Person = Person{"张三", 20, 'm'}
-	var p3 Person = Person{"张三", 201, 'm'}
+	var p1 = Person{"张三", 20, 'm'}
+	var p2 = Person{"张三", 20, 'm'}
+	var p3 = Person{"张三", 201, 'm'}
 	fmt.Println("p1 == p2", p1 == p2)
 	fmt.Println("p1 ==p3", p1 == p3)
 
@@ -70,7 +70,7 @@ func test3(data *Person1) {
 }
 func main3() {
 	//	TODO 1.第一种方法
-	var p1 *Person1 = &Person1{name: "王", age: 20, sex: 'f'}
+	var p1 = &Person1{name: "王", age: 20, sex: 'f'}
 
 	fmt.Println(*p1)
 	fmt.Printf("p1 = %T\n", p1)
@@ -104,6 +104,7 @@ func init_print(data *Person4) {
 	data.sex = 'n'
 	data.age = 20
 	data.ids = append(data.ids, "123", "456")
+	//fmt.Println(data)
 
 }
 func init_print2() *Person4 {
@@ -120,9 +121,9 @@ func init_print2() *Person4 {
 func main() {
 	var p1 Person4 //TODO 初始值函数内部传普通结构体地址的方法
 	init_print(&p1)
-	fmt.Println(p1)
-	p2 := init_print2() //TODO 初始值带返回值的方法 注意：不能返回局部变量的地址值，原因： 局部变量保存在栈针上，函数调用结束后，会立即释放，但是不会把值清除掉，但不会受系统保护，随时可能分配到其他程序
-	fmt.Println(*p2)
-	fmt.Printf("%T\n", p2)
+	//fmt.Println(p1)
+	//p2 := init_print2() //TODO 初始值带返回值的方法 注意：不能返回局部变量的地址值，原因： 局部变量保存在栈针上，函数调用结束后，会立即释放，但是不会把值清除掉，但不会受系统保护，随时可能分配到其他程序
+	//fmt.Println(*p2)
+	//fmt.Printf("%T\n", p2)
 
 }

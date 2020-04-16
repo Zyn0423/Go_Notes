@@ -5,9 +5,20 @@ import (
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"strings"
 )
 
-func Map_bobyplant(boby map[string]string) (string_boby string) {
+type bankerrate struct {
+	Name             string
+	Spotexchangebuy  string
+	Oofbuy           string
+	Spotexchangesell string
+	Oofsell          string
+	Middleprice      string
+	Issuetime        string
+}
+
+func Map_bobyplant(boby map[string]string) (string_boby string) { //TODO boby 参数加工厂
 	string_boby = ""
 	for k, v := range boby {
 
@@ -16,23 +27,45 @@ func Map_bobyplant(boby map[string]string) (string_boby string) {
 	return
 }
 
-func err_fun(err error, info string) {
+func err_fun(err error, info string) { // todo 错误函数
 	if err != nil {
 		fmt.Println(info, err)
 		return
 	}
 
 }
-func parase_html(data string) {
+
+func list_data(data *bankerrate, list_split []string) {
+	data.Name = list_split[1]
+	data.Spotexchangebuy = list_split[2]
+	data.Oofbuy = list_split[3]
+	data.Spotexchangesell = list_split[4]
+	data.Oofsell = list_split[5]
+	data.Middleprice = list_split[6]
+	data.Issuetime = list_split[7]
+	fmt.Println(*data)
+
+}
+func parase_html(data string) { //TODO 解析函数
 	rex, err := regexp.Compile(`<tr>(?s:(.*?))</tr>`)
-	err_fun(err, "regexp.Compile")
-	result := rex.FindAllStringSubmatch(data, -1)
+	err_fun(err, "regexp.Compile")                // 正则语法
+	result := rex.FindAllStringSubmatch(data, -1) // 获取筛选后的数据
+	var b bankerrate                              //声明b 变量结构体
+
 	for _, n := range result {
-		rex, err := regexp.Compile(`<td>(?s:(.*?))</td>`)
+		rex, err := regexp.Compile(`<td>(?s:(.*?))</td>`) // 正则语法
 		err_fun(err, "regexp.Compile")
-		result2 := rex.FindAllStringSubmatch(n[1], -1)
+		result2 := rex.FindAllStringSubmatch(n[1], -1) // 获取筛选后的数据
+		string_data := ""                              // TODO 对数据进行拼接
 		for _, n1 := range result2 {
-			fmt.Println(n1[1])
+			string_data += " " + n1[1]
+		}
+
+		strlist := strings.Split(string_data, " ")
+		if len(strlist) > 1 {
+			list_data(&b, strlist)
+		} else {
+			continue
 		}
 	}
 }
