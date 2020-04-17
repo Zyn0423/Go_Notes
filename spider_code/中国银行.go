@@ -21,7 +21,6 @@ type bankerrate struct {
 func Map_bobyplant(boby map[string]string) (string_boby string) { //TODO boby 参数加工厂
 	string_boby = ""
 	for k, v := range boby {
-
 		string_boby += k + "=" + v + ","
 	}
 	return

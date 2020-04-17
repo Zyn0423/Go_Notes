@@ -132,28 +132,55 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"regexp"
 )
 
-func main() {
+func err_fun1(err error, info string) {
+	if err != nil {
+		fmt.Println(info, err)
+		return
+	}
+}
+func parase_html1(html_data []byte) {
+	regx, err := regexp.Compile(`<div class="op_exrate_result">(?s:(.*?))</div>`)
+	err_fun1(err, "regexp.Compile")
+	fmt.Println(string(html_data))
+	os.Exit(-1)
+	div_html := regx.FindAllStringSubmatch(string(html_data), -1) //[][]
+	for _, v := range div_html {
+		fmt.Println(v[1])
+	}
 
-	url := "https://www.baidu.com/s?wd=%E6%B1%87%E7%8E%87"
+}
+
+func Http_Request(url string) []byte {
+
 	method := "GET"
-
 	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
-
-	if err != nil {
-		fmt.Println(err)
-	}
+	err_fun1(err, "http.NewRequest")
 	req.Header.Add("User-Agent", "Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36")
-	req.Header.Add("Cookie", "BIDUPSID=4B1603EE0F08DB4DBFE3093B91AEA24E; PSTM=1586921512; BAIDUID=4B1603EE0F08DB4DAE6EAC0B5FD2BE24:FG=1; delPer=0; BD_CK_SAM=1; PSINO=7; H_PS_PSSID=30962_1428_31125_21114_31187_31270_31051_30823_26350_31163_31196; BDSVRTM=12")
+	//req.Header.Add("Cookie", "BIDUPSID=4B1603EE0F08DB4DBFE3093B91AEA24E; PSTM=1586921512; BAIDUID=4B1603EE0F08DB4DAE6EAC0B5FD2BE24:FG=1; delPer=0; BD_CK_SAM=1; PSINO=7; H_PS_PSSID=30962_1428_31125_21114_31187_31270_31051_30823_26350_31163_31196; BDSVRTM=12")
 	req.Header.Add("Accept-Encoding", "gzip, deflate,br")
 	req.Header.Add("Content-Type", "application/json")
 	res, err := client.Do(req)
 	defer res.Body.Close()
 	read, err := gzip.NewReader(res.Body)
-
+	err_fun1(err, "gzip.NewReader")
 	body, err := ioutil.ReadAll(read)
-
-	fmt.Println(string(body))
+	err_fun1(err, "ioutil.ReadAll")
+	return body
 }
+
+// <div class="op_exrate_result">
+//                                        <div>1美元=7.0726人民币</div>                <div>1人民币=0.1414美元</div>
+//                        </div>
+func main() {
+	url := "https://www.baidu.com/s?wd=%E6%B1%87%E7%8E%87"
+	html_data := Http_Request(url)
+	parase_html1(html_data)
+
+}
+
+//
