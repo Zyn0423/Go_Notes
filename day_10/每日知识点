@@ -1,17 +1,169 @@
-爬虫的概念：
-        模拟浏览器，访问WEB服务器，获取特定的数据
+
+爬虫概念：
+
+	访问web服务器，获取指定数据信息的一段程序。
 
 工作流程：
-       1.明确目标URL
-       2.发送请求、获取应答数据包。http.get(url)
-       3.过滤数据  提取有用的数据
-       4.使用分析得到有用的数据
+	1. 明确目标 Url
+
+	2. 发送请求，获取应答数据包。 http.Get(url)
+
+	3. 过滤 数据。提取有用信息。	
+
+	4. 使用、分析得到数据信息。
+
+https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=0		下一页 +50
+
+https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=50
+
+https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=100
+
+https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=150
+
+https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=300
+
 
 百度贴吧爬虫实现：
-             1.提示用户指定  start  end    working  函数
-	         2.使用 start、end 循环 爬取每一页数据
-	         3.获取 每一页的 URL —— 下一页 = 前一页 + 50
-	         4.封装、实现 HttpGet() 函数，爬取一个网页的数据内容，通过 result 返回。
-	         http.Get/ resp.Body.Close/ buf := make（4096）/ for { resp.Body.Read(buf)/   result += string(buf[:n])  return
-	         5. 创建 .html 文件。 使用循环因子 i 命名。
-	         6. 将 result 写入 文件 f.WriteString（result）。   f.close()  不推荐使用 defer 。
+
+	1. 提示用户指定 起始、终止页。 创建working函数
+
+	2. 使用 start、end 循环 爬取每一页数据
+
+	3. 获取 每一页的 URL —— 下一页 = 前一页 + 50
+
+	4. 封装、实现 HttpGet() 函数，爬取一个网页的数据内容，通过 result 返回。
+
+		http.Get/ resp.Body.Close/ buf := make（4096）/ for { resp.Body.Read(buf)/   result += string(buf[:n])  return
+
+	5. 创建 .html 文件。 使用循环因子 i 命名。
+
+	6. 将 result 写入 文件 f.WriteString（result）。   f.close()  不推荐使用 defer 。
+
+并发版百度爬虫：
+
+	1. 封装 爬取一个网页内容的 代码 到  SpiderPage（index）函数中
+
+	2. 在 working 函数 for 循环启动 go 程 调用 SpiderPage() —— > n个待爬取页面，对应n个go程
+
+	3. 为防止主 go 程提前结束，引入 channel 实现同步。 SpiderPage（index，channel）
+
+	4. 在SpiderPage() 结尾处（一个页面爬取完成）， 向channel中写内容 。 channel <- index 
+
+	5.  在 working 函数 添加新 for 循环， 从 channel 不断的读取各个子 go 程写入的数据。 n个子go程 —— 写n次channel —— 读n次channel
+
+正则表达式：
+
+	能使用 string、strings、strcnov 包函数解决的问题，首选使用库函数。 其次再选择正则表达式。
+
+----字符：
+
+	“.”: 匹配任意一个字符
+
+	"[ ]": 匹配 [ ] 内任意一个字符。 
+
+	“-”：指定范围： a-z、A-Z、0-9
+
+	"^": 取反。 使用在 [ ] 内部。[^xy]8 
+
+	[[:digit:]] ——> 数字 == [0-9]
+
+-----次数：
+
+	“?”: 匹配 前面 单元出现 0-1次
+
+	“+”：匹配 前面 单元 出现 1-N次
+
+	“*”：匹配 前面 单元 出现 0-N次
+
+	“{N}”: 匹配 前面 单元  精确匹配 N 次
+
+	"{N,}": 匹配 前面 单元 至少匹配 N 次
+
+	"{N,M}": 匹配 前面 单元 匹配 N -- M 次。
+
+---- 单元限定符：
+	
+	“()”: 可以将一部分正则表达式，组成一个 单元，可以对该单元使用 数量限定符
+
+	 
+Go语言使用正则：
+
+---- 步骤：
+
+	1. 解析编译正则表达式：
+
+		MustCompile(str string) *Regexp 
+
+		参数：正则表达式： 建议使用“反引号”—— ` `
+
+		返回值： 编译后的正则表达式 （结构体类型）
+
+	2. 提取需要的数据：
+
+		func (re *Regexp) FindAllStringSubmatch(s string, n int) [][]string
+
+		参数1：待匹配的字符串。
+
+		参数2：匹配次数。 -1 表匹配全部
+
+		返回值： 存储匹配结果的 [ ][ ]string
+
+			数组的每一个成员都有 string1 和 string2 两个元素。
+
+				string1：表示， 带有匹配参考项的字符串。 【0】
+				
+				string2：表示，不包含匹配参考项的字符串内容。【1】
+
+----- 提取网页标签数据：
+
+	举例： 提取 <div></div> 之中的数据
+
+		1） <div>(.*)</div>	--> 可以提取div标签的内容
+
+		2） 对于 div 标签中 含有多行内容清空：
+
+			正则表达式：(?s:(.*?))	
+
+双向爬取：
+
+	横向：以页为单位。
+
+	纵向：以一个页面内的条目为单位。
+
+横向：
+https://movie.douban.com/top250?start=0&filter=		1
+
+https://movie.douban.com/top250?start=25&filter=		2
+
+https://movie.douban.com/top250?start=50&filter=		3
+
+https://movie.douban.com/top250?start=75&filter=		4
+
+纵向：
+	电影名称： <img width="100" alt="电影名称"			——> `<img width="100" alt="(.*?)"`
+
+	分数：<span class="rating_num" property="v:average">分数</span>	——> `<span class="rating_num" property="v:average">(.*?)</span>`
+
+	评分人数：<span> 评分人数   人评价</span>			——> `<span>(.*?)人评价</span>`
+
+爬取豆瓣电影信息：
+	
+---- 实现流程：
+
+	1.  获取用户输入 起始、终止页、启动 toWork 函数 循环 调用 SpiderPageDB(url) 爬取每一个页面
+
+	2.  SpiderPageDB 中， 获取 豆瓣电影 横向爬取url 信息。封装 HttpGet 函数，爬取一个页面所有数据 存入 result 返回
+
+	3.  找寻、探索豆瓣网页 纵向爬取规律。找出“电影名”、“分数”、“评分人数”网页数据特征。
+
+	4. 分别 对这三部分数据使用 go 正则函数： 1） 解析、编译正则表达式 2） 提取信息 ——>  string[1]: 代表没有  匹配参考项内容。
+
+	5. 将提取到的数据，按自定义格式写入文件。使用 网页编号命名文件。
+
+	6. 实现并发。 	1） go SpiderPageDB(url) 。 
+
+			2） 创建 channel 防止主 go 程退出
+
+			3） SpiderPageDB 函数末尾，写入 channel 
+
+			4） 主 go 程 for  读取 channel 。	
