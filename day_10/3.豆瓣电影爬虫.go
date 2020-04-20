@@ -20,18 +20,31 @@ func err_fun2(err error, info string) {
 	}
 }
 
-func parses_Html(html_data []byte) {
-	regx, err := regexp.Compile(`<img width="100" alt="(.*?)"`)
+func Regxp_Compile_DouBan(re string, data []byte) []string {
+	regx, err := regexp.Compile(re)
 	err_fun2(err, "regexp.Compile")
-	data_cline := regx.FindAllStringSubmatch(string(html_data), -1)
-	for _, v := range data_cline {
-		fmt.Println(v[1])
+	data_ := regx.FindAllStringSubmatch(string(data), -1)
+	string_list := []string{}
+	for _, v := range data_ {
+		string_list = append(string_list, v[1])
 	}
+	return string_list
+
+}
+
+func parses_Html(html_data []byte) {
+	Movie_Name := Regxp_Compile_DouBan(`<img width="100" alt="(.*?)"`, html_data)
+	Movie_grade := Regxp_Compile_DouBan(`<span class="rating_num" property="v:average">(.*?)</span>`, html_data)
+	Movie_evaluate := Regxp_Compile_DouBan(`<span>(.*?)人评价</span>`, html_data)
+	for i := 0; i < 25; i++ {
+		fmt.Println("电影名："+Movie_Name[i], "评分 ："+Movie_grade[i], "点赞人数 ："+Movie_evaluate[i])
+	}
+
 }
 func Http_requests1(i int) (result string) {
 	url_data := "https://movie.douban.com/top250?start=" + strconv.Itoa((i-1)*25) + "&filter="
 	//url_data :="https://tieba.baidu.com/f?kw=%E6%B5%B7%E8%B4%BC%E7%8E%8B&ie=utf-8&pn=0"
-	fmt.Printf("%s", url_data)
+	//fmt.Printf("%s", url_data)
 
 	client := &http.Client{}
 	requests, err := http.NewRequest("GET", url_data, nil)
@@ -43,6 +56,7 @@ func Http_requests1(i int) (result string) {
 	html, err := ioutil.ReadAll(respones.Body)
 	err_fun2(err, "ioutil.ReadAll")
 	parses_Html(html)
+
 	//fmt.Println(string(html))
 
 	//resp ,err:=http.Get(url_data)
@@ -86,6 +100,7 @@ func WorkIng(start, end int) {
 }
 
 func main() {
+
 	var start, end int //TODO 定义起始和结束类型
 	fmt.Print("输入起始页 ：")
 	fmt.Scan(&start)
