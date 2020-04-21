@@ -1,0 +1,128 @@
+https://www.pengfu.com/xiaohua_1.html		1	下一页+1
+
+https://www.pengfu.com/xiaohua_2.html		2
+
+https://www.pengfu.com/xiaohua_3.html		3
+
+
+获取一个页面中，一个段子的 URL 特征： <h1 class="dp-b"><a href=" 段子URL "	—— 10 处
+
+	取一个段子中的 title 特征	 <h1>title</h1>	—— 有2处，取第一个。
+
+	取一个段子中的 content 特征	<div class="content-txt pt10"> 段子内容 <br />
+
+----------------
+
+爬取斗鱼-颜值图片
+
+----------------
+
+go爬虫框架：
+	gocolly
+
+go开源爬虫项目：
+	https://www.oschina.net/p/pholcus
+
+========================================== 总结 ============================================
+
+指针：
+
+	指针做函数参数、返回值
+
+切片：
+	buf := make([]byte, 4096)
+
+	做函数参数、返回值——传引用。
+
+	append函数
+
+map：
+	创建、存储、delete、遍历
+
+结构体：
+
+	创建、初始化、传参（默认：传值。 推荐：传引用、返回值）
+
+文件操作：
+
+	字符串常用操作函数：
+
+		split、replace、Fields、Itoa、Atoi、HasSuffix、Contains、Join
+
+	文件处理函数：
+
+		Open、Create、OpenFile、Readdir
+
+	文件操作练习。 大文件拷贝。
+
+goroutine：
+
+	[ 进程 ]、程序、线程、协程、[ go程 ]。
+
+	进程状态。
+
+	同步概念。—— 基本同步方法。
+
+	goroutine 特性。
+
+	Goexit、return、 os.Exit(2) 	区别和联系。
+
+channel：
+
+	创建
+
+	无缓冲、有缓冲channel
+
+	关闭 channel 特性。		区分：—— 读写都在，不读，不写。—— 阻塞。
+
+	单向 channel。 —— 传参
+
+	生产者、消费者。
+
+	定时器：Timer、time.After
+
+	select : 监听 channel 上的数据流动。
+
+	死锁： 单go程死锁、两个go程先后顺序死锁、交叉死锁。
+
+	同步方法：互斥量、读写锁、条件变量。—— 生产者、消费者（并发）
+
+网络编程：
+
+	协议：osi7层模型、tcp/ip4层。 —— 各层代表协议。
+
+	数据通信过程：数据——应用层——传输层——网络层——链路层——网络环境。
+
+	socket概念。 BS、CS设计模式。
+
+	TCP-CS通信代码实现。 —— 并发版。
+
+	TCP通信过程： 3次握手、4次挥手。 —— 画图讲解
+
+	UDP通信：CS通信代码实现。——并发版。
+
+	UDP 与 TCP的区别：优缺点——使用场景。
+
+	网络文件传输： 大文件拷贝 + TCP-CS
+
+	并发聊天室： —— 以前知识的集合。（cs通信、channel、goroutine、map、切片、结构体、select ） —— 务必实现。
+
+HttP编程：
+
+	web服务器工作方法： DNS服务器、Http、URL
+
+	http请求协议基本格式。
+
+	http应答协议基本格式。
+
+	Go函数，实现http Web服务器。	模拟客户端。
+
+爬虫开发：
+
+	爬虫工作路程： 4步。
+
+	横向、纵向爬取。
+
+	正则表达式。
+
+	百度贴吧、段子（捧腹网）、豆瓣电影、斗鱼。
