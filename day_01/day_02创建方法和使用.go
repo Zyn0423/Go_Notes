@@ -23,6 +23,7 @@ func (d cat) show() {
 }
 
 func main() {
+	//值传递
 	var d dog
 	d.Name = "m"
 	d.Age = 10
