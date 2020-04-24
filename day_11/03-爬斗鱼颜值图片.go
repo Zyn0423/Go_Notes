@@ -9,6 +9,9 @@ import (
 	"strconv"
 )
 
+type wricoco interface {
+}
+
 func SaveImg(idx int, url string, page chan int) {
 	path := "C:/itcast/img/" + strconv.Itoa(idx+1) + ".jpg"
 	f, err := os.Create(path)
