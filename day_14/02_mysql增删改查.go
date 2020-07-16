@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	DB, err := sql.Open("mysql", "root:")
+	DB, err := sql.Open("mysql", "root:Zxn123456@(127.0.0.1:3306)/workaccount")
 	if err != nil {
 		fmt.Println("sql.Open", err)
 	}

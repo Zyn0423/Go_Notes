@@ -8,7 +8,7 @@ import (
 
 func main() {
 	//TODO 用户名 密码@[连接方式]（主机，端口号）/数据库名
-	db, err := sql.Open("mysql", "")
+	db, err := sql.Open("mysql", "root:密码(host...)）")
 	if err != nil {
 		fmt.Println("sql.Open", err)
 		return
