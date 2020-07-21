@@ -34,5 +34,6 @@ func main() {
 	m.Name = "x"
 	m.Age = 12
 	m.show()
+	fmt.Println(m)
 
 }

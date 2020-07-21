@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -47,9 +48,11 @@ func slice_1_1() { //TODO 去重
 	//	——>	{"red", "black", "pink", "blue"}
 	data := []string{"red", "black", "red", "pink", "blue", "pink", "blue"}
 	out := data[:0] //创建一个空切片
-	fmt.Println(out)
+	fmt.Printf("空切片%v\n", out)
 	for _, value := range data { //外层遍历要查询的数据
 		i := 0
+		fmt.Printf("i %v\n", i)
+		fmt.Printf("判断长度out%v\n", len(out))
 		for ; i < len(out); i++ { //内层需要定义一个循环来查看自己定义的空切片是否有重复的数据，如有就跳出循环如果没有记住遍历的位置以及下标的位置添加到空切片中
 			if value == out[i] {
 				break
@@ -102,8 +105,9 @@ func wcFunc(str_text string) map[string]int {
 func main() {
 	//slice_1()
 	//noSame()
-	//slice_1_1()
+	slice_1_1()
 	//remove()
+	os.Exit(1)
 	str_text := "I love my work and I love my family too"
 	a := wcFunc(str_text)
 	fmt.Println(a)

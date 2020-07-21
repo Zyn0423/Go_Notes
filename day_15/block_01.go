@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("hello")
+	fmt.Println("hello world")
 	//每首先21万块减半
 	//最初奖励50BTC
 	//用一个循环来判断、增加
