@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            color: red;
+        }
+
+        .bule{
+            color: blue;
+        }
+
+        .bule span {
+            font-size: 50px;
+            color: red;
+        }        <!--TODO 特别注意层级选择器里span不加 . -->
+    </style>
+    <!--1、标签选择器
+标签选择器，此种选择器影响范围大，一般用来做一些通用设置，或用在层级选择器中。
+举例： -->
+    <!--2、类选择器
+通过类名来选择元素，一个类可应用于多个元素，一个元素上也可以使用多个类，应用灵活，可复用，是css中应用最多的一种选择器。 -->
+    <!--3、层级选择器
+主要应用在标签嵌套的结构中，层级选择器，是结合上面的两种选择器来写的选择器,它可与标签选择器结合使用，减少命名，同时也可以通过层级，限制样式的作用范围。 -->
+</head>
+    <body>
+    <div>1.标签选择器</div>
+    <div class="bule"> 2、类选择器</div>
+    <div class="bule">层级选择器<span>主要应用在标签嵌套的结构中，层级选择器，是结合上面的两种选择器来写的选择器,它可与标签选择器结合使用，减少命名，同时也可以通过层级，限制样式的作用范围</span></div>
+
+    </body>
+</html>
