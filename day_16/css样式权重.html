@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 权重值：1 */
+        div{
+            color:blue;
+        }
+
+        /* 权重值：1+10+10+1 = 22 */
+        body .con .box h3{
+            color:#9f4743;
+        }
+
+        /* 权重值：10+10+1 = 21 */
+        .con .box h3{
+            color:red;
+        }
+
+        /* 权重值：10+1 = 11 */
+        .con h3{
+            color:blue;
+        }
+
+        .box h3{
+            color:pink;
+        }
+
+    </style>
+</head>
+<body>
+<!-- style的权重是：1000 -->
+<div style="color:red">这是一个div</div>
+
+<div class="con">
+    <div class="box">
+        <h3>这是一个h3标题</h3>
+    </div>
+</div>
+</body>
+</html>
