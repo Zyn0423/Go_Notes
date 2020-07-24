@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .search_form{
+            width:602px;
+            height:42px;
+            background:gold;
+            margin:100px auto;
+        }
+
+        .input_txt{
+            width:500px;
+            height:40px;
+            border:1px solid #0fad10;
+            /* 清除输入框默认的padding值 */
+            padding:0px;
+
+            /* 通过浮动解决内联元素默认间距以及基线对齐的问题 */
+            float: left;
+
+            /* 让文字缩进 */
+            text-indent:10px;
+
+            /* 去掉输入框点击时显示的蓝色高亮框 */
+            outline:none;
+        }
+
+        .input_sub{
+            width:100px;
+            height:42px;
+            background: #0fad10;
+            /* 去掉按钮默认的边框 */
+            border:0px;
+            /* 通过浮动解决内联元素默认间距以及基线对齐的问题 */
+            float: left;
+            font-size:18px;
+            color:white;
+        }
+
+
+    </style>
+</head>
+<body>
+<!--
+    https://cn.bing.com/search?q=c&qs=n&form=QBLH&sp=-1&pq=c&sc=10-1&sk=&cvid=29A29F29BADE4EFC95283176AAA31A3F
+ -->
+
+<form class="search_form" action="https://cn.bing.com/search">
+    <!-- 设置输入框默认的提示文字，用placeholder属性 -->
+    <input type="text" class="input_txt" placeholder="请输入框搜索内容" name="q">
+    <input type="submit" value="搜 索" class="input_sub">
+</form>
+</body>
+</html>
