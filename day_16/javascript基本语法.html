@@ -7,11 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        alert("helloworld2")
-    </script><!--内嵌式引用方式 -->
-    <script src="./js/index.js"></script><!--外链式引用方式 -->
+        var iNumber = 20 , string1 = "hello world " ,bOol= true;
+        alert(iNumber);
+        alert(string1);
+        alert(bOol);
+        function test() {
+            return 10*0.5
+        }
+        alert(test())
+    </script>
 </head>
 <body>
-    <p onclick="alert('helloworld1')">这是第一种引入方式</p>    <!--页面引用方式 -->
+
 </body>
 </html>
