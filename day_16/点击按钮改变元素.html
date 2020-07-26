@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div_01{
+            width: 200px;
+            height: 200px;
+            background: black;
+
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var sInp = document.getElementById('inp');
+            var sDiv = document.getElementById('div_001');
+
+
+            sInp.onclick  = function (){
+                sDiv.style.width = '200px';
+                sDiv.style.height ='200px';
+
+                sDiv.style.background='red';
+            };  //  匿名函数的使用
+
+
+
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="改变样式" id="inp">
+    <div class="div_01" id="div_001">
+
+    </div>
+</body>
+</html>
