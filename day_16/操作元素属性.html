@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test_01{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+    </style>
+
+
+    <script>
+        window.onload =function () {
+            var str_01 = document.getElementById("div_01");   // 获取id属性
+            var str_id = str_01.id;    //获取属性的值
+            var str_02 = document.getElementById("div_02");
+            alert(str_id);
+            str_01.style.color ='red';
+            str_01.style.fontSize ='30px';
+            str_02.style.widows ='400px';
+            str_02.style.height ='400px';
+            str_02.style.background='blue';
+
+        //   获取标签的HTML内容
+            var sHtml = str_01.innerHTML;   // 获取内容
+            alert(sHtml) ;
+            str_01.innerHTML =  '<h3>hello world 1231</h3>'   // 修改标签内容
+
+
+        };
+    </script>
+</head>
+<body>
+        <div id="div_01" >hello world</div>
+        <p id="div_02" class="test_01">这是一个P标签</p>
+
+
+</body>
+</html>
