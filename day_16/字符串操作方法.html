@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var iNum01 = 12;
+        var iNum02 = 12.32;
+        var sNum01 = '12';
+        var sNum02 = '12.32';
+
+        // "+" 符号运算，如果符号两边都是数字，就做加法运算，如果有一边是字符串，就做字符串拼接
+        //alert(iNum01 + 10);
+        //alert(sNum01 + 10);
+
+        // 将整数的字符串转化为整数，用parseInt()方法
+        //alert( parseInt(sNum01) + 20 );
+        //alert( parseInt(sNum02) + 20 );
+
+        // 将小数的字符串转化为小数，用parseFloat() 方法
+        //alert( parseFloat(sNum02) + 20 );
+
+        // 将字符串分割成数组
+        var sTr = '2018-9-2';
+
+        var aList = sTr.split('-');
+        var aList2 = sTr.split('');
+        //alert(aList);
+        //alert(aList2);
+
+
+        // 获取某小段字符在大段字符里面第一次出现的索引值
+        var sTr2 = 'abcdef12345ghif1jkl';
+        var iPos = sTr2.indexOf('f1');
+        var iPos2 = sTr2.indexOf('i1');
+
+        //alert(iPos);
+        //alert(iPos2);
+
+        // 字符串切片
+        var sTr3 = sTr2.substring(6,11);
+        // 写一个参数，表示从这个参数一直切割到字符串结尾
+        var sTr4 = sTr2.substring(6);
+        alert(sTr3);
+        alert(sTr4);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
