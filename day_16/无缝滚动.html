@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动</title>
+    <style type="text/css">
+        body,ul{
+            margin:0;
+            padding:0;
+        }
+
+        .list_con{
+
+            width:1000px;
+            height:200px;
+            border:1px solid #000;
+            margin:10px auto 0;
+            background-color:#f0f0f0;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .list_con ul{
+            list-style:none;
+            width:2000px;
+            height:200px;
+            position:absolute;
+            /* 样式的值如果是0，可以不写单位 */
+            left:0;
+            top:0;
+        }
+
+
+        .list_con li{
+            width:180px;
+            height:180px;
+            float:left;
+            margin:10px;
+        }
+
+        .btns_con{
+            width:1000px;
+            height:30px;
+            margin:50px auto 0;
+            position:relative;
+        }
+
+        .left,.right{
+            width:30px;
+            height:30px;
+            background-color:gold;
+            position:absolute;
+            left:-40px;
+            top:124px;
+            font-size:30px;
+            line-height:30px;
+            color:#000;
+            font-family: 'Arial';
+            text-align:center;
+            cursor:pointer;
+            border-radius:15px;
+            opacity:0.5;
+        }
+        .right{
+            left:1010px;
+            top:124px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oList = document.getElementById('list');
+            var oLeft = document.getElementById('btn01');
+            var oRight = document.getElementById('btn02');
+            var oSlide = document.getElementById('slide');
+
+            // 将ul中的5个li复制一份，成为10个li
+            oList.innerHTML = oList.innerHTML + oList.innerHTML;
+
+            var iLeft = 0;
+            var iSpeed = -3;
+
+            // 定义一个变量，来存储iSpeed上一次的值
+            var iLastSpeed = -3;
+
+            var timer = setInterval(fnMove,30);
+
+            function fnMove(){
+                iLeft += iSpeed;
+
+                // 运动到最左边的时候
+                if(iLeft<-1000){
+                    iLeft = 0;
+                }
+
+                // 运动到最右边的时候，也就是起始位置
+                if(iLeft>0){
+                    iLeft = -1000;
+                }
+
+                oList.style.left = iLeft + 'px';
+            }
+
+            // 左右箭头的点击事件
+            oLeft.onclick = function(){
+                iSpeed = -3;
+            };
+
+            oRight.onclick = function(){
+                iSpeed = 3;
+            };
+
+            // 给滚动的图片外面的容器标签做鼠标的移入移出事件
+            oSlide.onmouseover = function(){
+                //clearInterval(timer);
+                iLastSpeed = iSpeed;
+                iSpeed = 0;
+            };
+
+            oSlide.onmouseout = function(){
+                //timer = setInterval(fnMove,30);
+                iSpeed = iLastSpeed;
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="btns_con">
+    <div class="left" id="btn01">&lt;</div>
+    <div class="right" id="btn02">&gt;</div>
+</div>
+<div class="list_con" id="slide">
+    <ul id="list">
+        <li><a href=""><img src="images/goods001.jpg" alt="商品图片"></a></li>
+        <li><a href=""><img src="images/goods002.jpg" alt="商品图片"></a></li>
+        <li><a href=""><img src="images/goods003.jpg" alt="商品图片"></a></li>
+        <li><a href=""><img src="images/goods004.jpg" alt="商品图片"></a></li>
+        <li><a href=""><img src="images/goods005.jpg" alt="商品图片"></a></li>
+    </ul>
+</div>
+</body>
+</html>
+
