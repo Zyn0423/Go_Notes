@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .list{
+            width:300px;
+            list-style:none;
+            padding:0px;
+            margin:50px auto;
+        }
+
+        .list li{
+            line-height:50px;
+            border-bottom:1px dotted black;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            var aList = ['碟中谍6','红海','古墓丽影3','熊出没','喜羊羊和灰太狼','小猪佩奇'];
+            var sTr = '';
+            var oUl  = document.getElementById('list');
+
+            for (var  i = 0; i < aList.length; i++) {
+                sTr += '<li>' + aList[i] + '</li>';
+            }
+            oUl.innerHTML = sTr;
+        }
+
+    </script>
+</head>
+<body>
+<ul class="list" id="list">
+    <!-- <li>电影名称排行</li>
+    <li>电影名称排行</li>
+    <li>电影名称排行</li>
+    <li>电影名称排行</li>
+    <li>电影名称排行</li>
+    <li>电影名称排行</li> -->
+</ul>
+</body>
+</html>
