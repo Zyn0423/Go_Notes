@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            var $div = $('#div01');
+
+            $div.prev().css({'color':'red'});
+            $div.prevAll().css({'text-indent':50});
+            $div.next().css({'color':'pink'});
+            $div.nextAll().css({'text-indent':30});
+
+            $div.siblings().css({'text-decoration':'underline'});
+
+            $div.parent().css({'background':'#ddd'});
+
+            $div.children().css({'color':'red'});
+
+            $div.find('.sp02').css({'font-size':20});
+
+        })
+
+
+    </script>
+</head>
+<body>
+<div>
+    <h2>这是一个h2标题</h2>
+    <p>这是第一个段落标签</p>
+    <div id="div01">这是一个<span>div</span><span class="sp02">第二个span</span></div>
+    <h3>这是一个h3标题</h3>
+    <p>这是第二个段落标签</p>
+</div>
+</body>
+</html>
