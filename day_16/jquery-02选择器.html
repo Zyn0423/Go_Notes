@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            var $div = $('#div01');
+            var $div2 = $('.box');
+            var $li = $('li');
+            var $span = $('.box span');
+            // 属性选择器
+            var $div3 = $('div[class="box2"]');
+
+            // 选择包含span标签的div
+            var $div4 = $('div').has('span');
+
+            // 选择class不是box2的div
+            var $div5 = $('div').not('.box2');
+
+            // 选择第4个li
+            var $li2 = $('li').eq(3);
+
+
+            $div.css({'color':'red','font-size':30});
+            $div2.css({'color':'gold','fontSize':'30px'});
+            $li.css({'background':'gold'});
+            $span.css({'color':'red','font-weight':'bold'});
+            $div3.css({'color':'pink','font-size':30});
+
+            $div4.css({'text-indent':50});
+            $div5.css({'text-decoration':'underline'});
+            $li2.css({'text-indent':50});
+        })
+
+    </script>
+</head>
+<body>
+<div id="div01">这是一个div</div>
+<div class="box">这是第二个<span>div</span></div>
+<div class="box">这是第三个div</div>
+<div class="box2">这是第四个div</div>
+<ul>
+    <li>列表文字</li>
+    <li>列表文字</li>
+    <li>列表文字</li>
+    <li>列表文字</li>
+    <li>列表文字</li>
+    <li>列表文字</li>
+</ul>
+</body>
+</html>
