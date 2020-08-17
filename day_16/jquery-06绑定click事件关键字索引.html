@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            var $li  = $('.list li');
+            var $p = $('p');
+
+            // 绑定click事件
+
+            $li.click(function () {
+                // this表示当前发生事件的对象,它是一个原生js对象
+                // this.style.background = 'red';
+                $(this).css({'background':'red'});
+                // $(this) 表示当前发生事件的jquery对象
+                alert($(this).index())
+            });
+            alert($p.eq(0).index())
+        })
+    </script>
+
+</head>
+<body>
+    <ul class="list">
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+        <li>文字列表</li>
+    </ul>
+    <div>
+        <p>这是一个P标签</p>
+    </div>
+    <div>
+        <p>这是二个P标签</p>
+    </div>
+</body>
+</html>
