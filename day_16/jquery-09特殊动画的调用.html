@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:200px;
+            height:200px;
+            background:gold;
+            display:none;
+        }
+
+    </style>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            var $btn = $('#btn');
+            var $box = $('.box');
+
+            $btn.click(function(){
+
+                // 元素显示隐藏效果
+                // $box.hide();
+                // $box.show();
+                // $box.toggle();
+
+                // 元素淡入淡出效果
+                // $box.fadeIn();
+                // $box.fadeOut();
+                // $box.fadeToggle();
+
+                // 元素向下展开和向上卷起的动画
+                // $box.slideUp();
+                // $box.slideDown();
+                $box.stop().slideToggle();
+
+
+            })
+
+
+        })
+
+
+    </script>
+</head>
+<body>
+<input type="button" value="动画" id="btn">
+<div class="box"></div>
+</body>
+</html>
