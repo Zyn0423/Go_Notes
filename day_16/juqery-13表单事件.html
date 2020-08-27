@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            var $hid = $('#input1');
+            var $hform= $('#from1');
+            $hid.blur(function () {
+                // alert($(this).val());
+                // 绑定失去焦点的事件
+                var str = $(this).val();
+
+                if (str.length >0){
+                    alert('输入合法');
+                    $hform.submit(function () {
+
+                        return true
+                    })
+
+                }else {
+                    // 绑定submit事件
+                    $hform.submit(function () {
+                        // 判断数据是否合法
+
+                        // 阻止表单提交
+                        return false
+                    })
+                }
+
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <form id="from1">
+        <label >用户名 ：</label>
+        <input type="text" id="input1" name="username">
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
