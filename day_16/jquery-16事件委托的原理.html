@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            // var $li = $(".u1 li");
+            // $li.click(function () {
+            //     $(this).css({"background":"red"})
+            //
+            // })
+
+            var $ul = $(".u1");
+            $ul.delegate("li","click",function () {
+                $(this).css({"background":"red"})
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+    <ul class="u1">
+        <li>列表文字</li>
+        <li>列表文字</li>
+        <li>列表文字</li>
+        <li>列表文字</li>
+        <li>列表文字</li>
+        <li>列表文字</li>
+        <li>列表文字</li>
+    </ul>
+</body>
+</html>
