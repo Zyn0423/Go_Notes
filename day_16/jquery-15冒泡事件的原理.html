@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .grandfather{
+            width:300px;
+            height:300px;
+            background:purple;
+        }
+
+        .father{
+            width:200px;
+            height:200px;
+            background:gold;
+            position: relative;
+        }
+
+        .son{
+            width:100px;
+            height:100px;
+            background:red;
+            position: absolute;
+            left:0px;
+            top:400px;
+        }
+
+    </style>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            // var $son = $('.son');
+
+            $('.son').click(function(){
+                alert(1);
+
+                // 阻止事件冒泡的简略写法：
+                return false;
+            });
+
+            // 父级阻止事件冒泡
+            $('.father').click(function(ev){
+                alert(2);
+
+                // 阻止事件冒泡的完整写法：
+                ev.stopPropagation();
+            });
+
+
+            $('.grandfather').click(function(){
+                alert(3);
+            });
+
+
+            // $(document) 代表最顶级的标签
+            $(document).click(function(){
+                alert(4);
+            });
+
+
+        })
+
+    </script>
+</head>
+<body>
+<!-- .grandfather>.father>.son -->
+<div class="grandfather">
+    <div class="father">
+        <div class="son"></div>
+    </div>
+</div>
+</body>
+</html>
