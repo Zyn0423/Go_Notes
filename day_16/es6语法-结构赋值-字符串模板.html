@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let alist =  [1,2,3];
+        let blist = [...alist,4];
+        let preson = {
+            "name" : "zs",
+            "age" : 18,
+            "name_show" : function () {
+                alert(`我的名字叫${this.name}`)
+            }
+
+        };
+        let preson_2 = {
+            "name": "yd",
+            "age":20
+        };
+        // let {name,age} = preson_2;
+
+        function show_preson({name ,age}) {
+            alert(`${name},${age}`)
+        }
+        show_preson(preson_2);
+
+        // alert(blist);
+        // preson.name_show()
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
