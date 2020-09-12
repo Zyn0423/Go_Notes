@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+        /*
+        function fnAdd(a,b){
+            var rs = a + b;
+            alert(rs);
+        }
+        */
+
+        // 通过匿名函数赋值的形式定义函数
+        /*
+        let fnAdd = function(a,b){
+             var rs = a + b;
+             alert(rs);
+        }
+        */
+
+        // 匿名函数可以改成箭头函数的形式
+        let fnAdd =(a,b)=>{
+            var rs = a + b;
+            alert(rs);
+        };
+
+        // fnAdd(10,5);
+
+        /*
+        let fnMyalert = function(a){
+            alert(a);
+        }
+
+        let fnMyalert2 = function(){
+            alert('hi!');
+        }
+        */
+
+        let fnMyalert =a=>{
+            alert(a);
+        };
+        let fnMyalert2 =()=>{
+            alert('hi!');
+        };
+        //fnMyalert('hello!');
+        //fnMyalert2();
+        /*
+        let fnReturn = function(a,b){
+            return a + b;
+        }
+        */
+        let fnReturn = (a,b)=>a + b;
+        let fnReturn2 = (a,b)=>({"name":a,"age":b});
+        let iRs = fnReturn(20,30);
+        let iRs2 = fnReturn2('tom',18);
+
+        //alert(iRs);
+        console.log(iRs2);
+        // alert(window.iNum01);
+
+
+        let person = {
+            name:"tom",
+            age:18,
+            showname:function(){
+                setTimeout(()=>{ // 改成箭头函数的形式，当前的this就是指的person对象，如果是一般匿名函数，this指的是window对象
+                    alert(this.name);
+                },2000)
+            }
+        };
+        person.showname();
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
