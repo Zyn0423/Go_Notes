@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 定义一个json数据
+        var sJson = '{\
+            "name":"tom",\
+            "age":18,\
+            "hobby":["study","shopping","singing"],\
+            "school":{"name":"beida","location":"beijing"}\
+           }';
+
+        // 将json数据转化成JavaScript对象
+        var oJson = JSON.parse(sJson);
+
+        alert( oJson.name );
+        alert( oJson.hobby[0] );
+        alert( oJson.school.location );
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
