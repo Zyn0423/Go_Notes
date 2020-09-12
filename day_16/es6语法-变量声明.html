@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 用var 定义变量，变量有预解析的特性
+        alert(iNum01);
+        var iNum01 = 12;
+        alert(iNum01);
+
+        // let 定义的变量没有预解析，下面这一句出错
+        // alert(iNum02);
+        let iNum02 = 24;
+        alert(iNum02);
+
+        iNum02 = 25;
+
+        alert(iNum02);
+
+        // const定义的变量没有预解析，下面这一句出错
+        //alert(iNum03);
+        const iNum03 = 36;
+        alert(iNum03);
+
+        // const 定义的是常量，它的值不能修改，下面这一句出错
+        // iNum03 = 37;
+
+        alert(iNum03)
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
