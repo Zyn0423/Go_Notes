@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+
+        $(function(){
+
+            /*$.ajax({
+                url:'js/data.json',
+                type:'get',
+                dataType:'json'
+                /*success:function(dat){
+                    // console.log(dat);
+                    $('.login_btn').hide();
+                    $('.login_info em').html( dat.name ).parent().show();
+                },
+                error:function(){
+                    alert('服务器超时，请重试！');
+                }
+
+
+            }).done(function(dat){
+                $('.login_btn').hide();
+                $('.login_info em').html( dat.name ).parent().show();
+            }).fail(function(){
+                alert('服务器超时，请重试！');
+            })
+            */
+            // 上面是完整写法，可以简写成下面$.get的写法：
+
+            $.get('js/data.json',function(dat){
+                $('.login_btn').hide();
+                $('.login_info em').html( dat.name ).parent().show();
+            });
+
+        })
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
