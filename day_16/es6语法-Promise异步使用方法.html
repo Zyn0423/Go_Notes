@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        /*
+        $.ajax({
+            url:'js/data01.json',
+            type:'get',
+            dataType:'json',
+            success:function(dat01){
+                //console.log(dat);
+
+                 $.ajax({
+                    url:'js/data02.json',
+                    type:'get',
+                    dataType:'json',
+                    success:function(dat02){
+                        console.log([dat01,dat02])
+
+                    },
+                    error:function(err){
+
+                    }
+                 })
+            },
+            error:function(err){
+
+            }
+        })
+        */
+
+        let pro01 = new Promise(function(resolve,reject){
+            $.ajax({
+                url:'js/data01.json',
+                type:'get',
+                dataType:'json',
+                success:function(dat){
+                    resolve(dat);
+                },
+                error:function(err){
+                    reject(err);
+                }
+            })
+        });
+
+
+        let pro02 = new Promise(function(resolve,reject){
+            $.ajax({
+                url:'js/data02.json',
+                type:'get',
+                dataType:'json',
+                success:function(dat){
+                    resolve(dat);
+                },
+                error:function(err){
+                    reject(err);
+                }
+            })
+        });
+
+        pro01.then(function(dat){
+            console.log(dat);
+        }).catch(function(err){
+
+        });
+
+        Promise.all([pro01,pro02]).then(re=>{
+            console.log(re);
+        })
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
